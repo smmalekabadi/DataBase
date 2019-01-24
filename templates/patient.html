@@ -1,0 +1,90 @@
+<html>
+<head>
+</head>
+
+<body>
+	<script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
+<script type="text/javascript"
+        src="https://static.neshan.org/api/web/v1/openlayers/v4.6.5.js?callback=initMyMap2"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
+
+					<input id="dr" type="text" placeholder="dr id = ???"/>
+					<input id="week" type="text" placeholder="week = ???"/>
+					<input id="hour" type="text" placeholder="hour = ???"/>
+					<button onclick="addappo()" >add appo</button>
+
+					<p id="drs">
+						
+					</p>
+				<br>
+					<button onclick="seePrescription()" >add appo</button>
+					<p id="medi">
+					</p>
+
+				<br>
+					<button onclick="get_bed()" >add appo</button>
+				<br>
+					<button onclick="bed_data()" >add appo</button>
+					<p id="bed">
+					</p>
+					
+<script>
+	        	var myEmail =  myFunc({{var|tojson}})
+	        	function myFunc(vars) {
+        	    console.log(vars);
+    			return vars
+				}
+	function seePrescription() {
+		  var xhttp = new XMLHttpRequest();
+		  xhttp.onreadystatechange = function() {
+		    if (this.readyState == 4 && this.status == 200) {
+		      document.getElementById("medi").innerHTML = this.responseText;
+		    }
+		  };
+		  xhttp.open("GET", "http://127.0.0.1:5000/see-prescription?email="+ myEmail, true);
+		  xhttp.send();
+		}
+function bed_data() {
+		  var xhttp = new XMLHttpRequest();
+		  xhttp.onreadystatechange = function() {
+		    if (this.readyState == 4 && this.status == 200) {
+		      document.getElementById("bed").innerHTML = this.responseText;
+		    }
+		  };
+		  xhttp.open("GET", "http://127.0.0.1:5000/bed_data?email="+ myEmail, true);
+		  xhttp.send();
+		}
+function get_bed() {
+		  var xhttp = new XMLHttpRequest();
+		  xhttp.onreadystatechange = function() {
+		    if (this.readyState == 4 && this.status == 200) {
+		     console.log(this.responseText);
+		    }
+		  };
+		  xhttp.open("GET", "http://127.0.0.1:5000/get-bed?email="+ myEmail, true);
+		  xhttp.send();
+		}
+function addappo(){
+	p=$("#dr").val();
+	week=$("#week").val();
+	hour=$("#hour").val();
+	ajaxRequest = $.ajax({
+				  url: 'http://127.0.0.1:5000/add-appo',
+				  data: {
+				  		"dr":p,
+				  		"week":week,
+				  		"hour":hour,
+				  		"email":myEmail
+				},
+				  async: false
+
+					});
+			 ajaxRequest.done(function (data) {
+			 	console.log(data)
+			 })
+	}
+
+</script>
+</body>
+</html>

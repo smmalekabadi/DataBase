@@ -1,0 +1,55 @@
+<html>
+	<script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
+<script type="text/javascript"
+        src="https://static.neshan.org/api/web/v1/openlayers/v4.6.5.js?callback=initMyMap2"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<head>
+</head>
+<body>
+
+    <p>
+     		<br>
+     		<input id="name" type="text" placeholder="name = ???"/>
+     		<input id="family" type="text" placeholder="family = ???"/>
+			<input id="email" type="text" placeholder="email = ???"/>
+			<input id="mobile" type="text" placeholder="mobile = ???"/>
+			<input id="pass" type="text" placeholder="pass = ???"/>
+			<select id="utype">
+			  <option value="2">recep</option>
+			  <option value="3">acc</option>
+			  <option value="4">pharm</option>
+			  <option value="5">paient</option>
+			  <option value="6">lab</option>
+			  <option value="7">doctor</option>
+
+			</select>
+			<button onclick="signUp()" > add user </button>
+     	</p>
+
+<script>
+function signUp(){
+			name=$("#name").val();
+			family=$("#family").val();
+			email=$("#email").val();
+			mobile=$("#mobile").val();
+			pass=$("#pass").val();
+			uset_type = $('#utype').find(":selected").val();
+			ajaxRequest = $.ajax({
+				  url: 'http://127.0.0.1:5000/sign-up',
+				  data: {"family":family,
+				  		"name":name,
+				  		"email":email,
+				  		"mobile":mobile,
+				  		"password":pass,
+				  		"user_type":uset_type
+				},
+				  async: false
+
+					});
+			 ajaxRequest.done(function (data) {
+			 	console.log(data)
+			 })
+		}
+</script>
+</body>
+</html>

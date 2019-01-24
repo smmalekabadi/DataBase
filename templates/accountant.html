@@ -1,0 +1,58 @@
+<html>
+<head>
+</head>
+
+<body>
+	<script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
+<script type="text/javascript"
+        src="https://static.neshan.org/api/web/v1/openlayers/v4.6.5.js?callback=initMyMap2"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
+
+				<input id="pid" type="text" placeholder="pi id = ???"/>
+				<button onclick="seebill()" > see time </button>
+
+					<p id="drs">
+						
+					</p>
+				<br>
+
+					<input id="pidd" type="text" placeholder="p id = ???"/>
+					<input id="name" type="text" placeholder="name = ???"/>
+					<input id="cost" type="text" placeholder="cost = ???"/>
+					<button onclick="additem()" >add bill</button>
+
+<script>
+function seebill(){
+		var p=$("#pid").val();
+	 var xhttp = new XMLHttpRequest();
+		  xhttp.onreadystatechange = function() {
+		    if (this.readyState == 4 && this.status == 200) {
+		      document.getElementById("drs").innerHTML = this.responseText;
+		    }
+		  };
+		  xhttp.open("GET", "http://127.0.0.1:5000/bill-list?p="+p, true);
+		  xhttp.send();
+}
+function additem(){
+	p=$("#pidd").val();
+	cost=$("#cost").val();
+	name=$("#name").val();
+	ajaxRequest = $.ajax({
+				  url: 'http://127.0.0.1:5000/add-item',
+				  data: {
+				  		"p":p,
+				  		"cost":cost,
+				  		"name":name
+				},
+				  async: false
+
+					});
+			 ajaxRequest.done(function (data) {
+			 	console.log(data)
+			 })
+	}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<html>
+<head>
+</head>
+
+<body>
+		<script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
+<script type="text/javascript"
+        src="https://static.neshan.org/api/web/v1/openlayers/v4.6.5.js?callback=initMyMap2"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
+				<button onclick="seeTime()" > see time </button>
+					<p id="drs">
+						
+					</p>
+				<br>
+
+					<input id="drd" type="text" placeholder="dr id = ???"/>
+					<input id="weekd" type="text" placeholder="week days = ???"/>
+					<input id="hourd" type="text" placeholder="hours = ???"/>
+					<button onclick="setTimeDr()" > add dr time </button>
+
+				<br>
+					<input id="dr" type="text" placeholder="dr id = ???"/>
+					<input id="pa" type="text" placeholder="pa id = ???"/>
+					<input id="week" type="text" placeholder="what day = ???"/>
+					<input id="hour" type="text" placeholder="hour = ???"/>
+					<button onclick="setTimePatien()" > add pa and dr </button>
+<script>
+function seeTime(){
+	 var xhttp = new XMLHttpRequest();
+		  xhttp.onreadystatechange = function() {
+		    if (this.readyState == 4 && this.status == 200) {
+		      document.getElementById("drs").innerHTML = this.responseText;
+		    }
+		  };
+		  xhttp.open("GET", "http://127.0.0.1:5000/time-list", true);
+		  xhttp.send();
+}
+function setTimeDr(){
+	dr=$("#drd").val();
+	week=$("#weekd").val();
+	hourd=$("#hourd").val();
+	ajaxRequest = $.ajax({
+				  url: 'http://127.0.0.1:5000/add-dr-time',
+				  data: {
+				  		"dr":dr,
+				  		"week":week,
+				  		"hour":hourd
+				},
+				  async: false
+
+					});
+			 ajaxRequest.done(function (data) {
+			 	console.log(data)
+			 })
+	}
+function setTimePatien(){
+	dr=$("#dr").val();
+	p=$("#pa").val();
+	week=$("#week").val();
+	hourd=$("#hour").val();
+	ajaxRequest = $.ajax({
+				  url: 'http://127.0.0.1:5000/add-time-pa-dr',
+				  data: {
+				  		"dr":dr,
+				  		"p":p,
+				  		"week":week,
+				  		"hour":hourd
+				},
+				  async: false
+
+					});
+			 ajaxRequest.done(function (data) {
+			 	console.log(data)
+			 })
+
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<html>
+<head>
+</head>
+
+<body>
+	<script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
+<script type="text/javascript"
+        src="https://static.neshan.org/api/web/v1/openlayers/v4.6.5.js?callback=initMyMap2"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
+
+				<button onclick="seeMedicine()" > see available medicine  </button>
+
+					<p id="drs">
+						
+					</p>
+				<br>
+				<input id="time"type="time" name="timestamp" step="1">
+				<button onclick="seeMedicineFilter()" > see available medicine  </button>
+
+					<p id="medi">
+					</p>
+
+<script>
+function seeMedicine(){
+	 var xhttp = new XMLHttpRequest();
+		  xhttp.onreadystatechange = function() {
+		    if (this.readyState == 4 && this.status == 200) {
+		      document.getElementById("drs").innerHTML = this.responseText;
+		    }
+		  };
+		  xhttp.open("GET", "http://127.0.0.1:5000/see-medicine", true);
+		  xhttp.send();
+}
+function seeMedicineFilter(){
+	var p=$("#time").val();
+	 var xhttp = new XMLHttpRequest();
+		  xhttp.onreadystatechange = function() {
+		    if (this.readyState == 4 && this.status == 200) {
+		      document.getElementById("medi").innerHTML = this.responseText;
+		    }
+		  };
+		  xhttp.open("GET", "http://127.0.0.1:5000/see-medicine-filter?time="+p, true);
+		  xhttp.send();
+}
+
+</script>
+</body>
+</html>

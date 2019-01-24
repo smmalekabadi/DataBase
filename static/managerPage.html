@@ -1,0 +1,33 @@
+<html>
+
+   <body>
+
+   	<script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
+<script type="text/javascript"
+        src="https://static.neshan.org/api/web/v1/openlayers/v4.6.5.js?callback=initMyMap2"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+     <button onclick="loadDoc()" > report all user </button>
+     	<ul id="demo">
+     		
+     	</ul>
+
+
+        <script>
+        	function myFunc(vars) {
+    		return vars
+		}
+        	var myEmail =  myFunc({{vars|tojson}})
+		function loadDoc() {
+		  var xhttp = new XMLHttpRequest();
+		  xhttp.onreadystatechange = function() {
+		    if (this.readyState == 4 && this.status == 200) {
+		      document.getElementById("demo").innerHTML = this.responseText;
+		    }
+		  };
+		  xhttp.open("GET", "http://127.0.0.1:5000/user-list", true);
+		  xhttp.send();
+		}
+		
+		</script>
+   </body>
+</html>
