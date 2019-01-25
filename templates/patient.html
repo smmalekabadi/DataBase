@@ -23,11 +23,19 @@
 					</p>
 
 				<br>
-					<button onclick="get_bed()" >add appo</button>
+					<button onclick="get_bed()" >get bed</button>
 				<br>
-					<button onclick="bed_data()" >add appo</button>
+					<button onclick="bed_data()" >bed data</button>
 					<p id="bed">
 					</p>
+				<br>
+					send message 
+					<input id="rid" type="text" placeholder="drid id = ???"/>
+					<input id="title" type="text" placeholder="title = ???"/>
+					<input id="body" type="text" placeholder="body = ???"/>
+					<button onclick="send_message()" > send </button>
+				<br>
+					<button onclick="mymessages()" > send </button>
 					
 <script>
 	        	var myEmail =  myFunc({{var|tojson}})
@@ -52,7 +60,7 @@ function bed_data() {
 		      document.getElementById("bed").innerHTML = this.responseText;
 		    }
 		  };
-		  xhttp.open("GET", "http://127.0.0.1:5000/bed_data?email="+ myEmail, true);
+		  xhttp.open("GET", "http://127.0.0.1:5000/bed-data?email="+ myEmail, true);
 		  xhttp.send();
 		}
 function get_bed() {
@@ -83,6 +91,28 @@ function addappo(){
 			 ajaxRequest.done(function (data) {
 			 	console.log(data)
 			 })
+	}
+
+	function send_message(){
+		p=$("#drid").val();
+	title=$("#title").val();
+	body=$("#body").val();
+	ajaxRequest = $.ajax({
+				  url: 'http://127.0.0.1:5000/send-message',
+				  data: {
+				  		"rid":p,
+				  		"title":title,
+				  		"body":body,
+				  		"email":myEmail
+				},
+				  async: false
+
+					});
+			 ajaxRequest.done(function (data) {
+			 	console.log(data)
+			 })
+
+
 	}
 
 </script>

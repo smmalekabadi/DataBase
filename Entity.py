@@ -108,3 +108,26 @@ class PrescriptionItem:
         self.pre_id=pre_id
         self.med_id=med_id
         self.count=count
+
+class Message:
+    def __init__(self, sender_id, receiver_id, title,body):
+        self.sender_id = sender_id
+        self.receiver_id = receiver_id
+        self.title = title
+        self.body=body
+    def save(self):
+        db = DB('localhost', 'root', 'db')
+        connection = db.data_base_connection()
+        sql = 'INSERT INTO `mail` (`sender_id`,`receive_id`,`title`,`body`) VALUES (%s,%s,%s,%s)'
+        try:
+            with connection.cursor() as cursor:
+                 cursor.execute(sql, (self.sender_id,self.receiver_id,self.title,self.body))
+                 connection.commit()
+        finally:
+            connection.close()
+
+class LabPrescription:
+    def __init__(self,doctor_id,patient_id,name):
+        self.doctor_id = doctor_id
+        self.patient_id = patient_id
+        self.name=name

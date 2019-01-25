@@ -1,0 +1,51 @@
+<html>
+	<script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
+<script type="text/javascript"
+        src="https://static.neshan.org/api/web/v1/openlayers/v4.6.5.js?callback=initMyMap2"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<head>
+</head>
+<body>
+
+    <p>
+     		<br>
+     		<input id="name" type="text" placeholder="name = ???"/>
+     		<input id="family" type="text" placeholder="family = ???"/>
+			<input id="email" type="text" placeholder="email = ???"/>
+			<input id="mobile" type="text" placeholder="mobile = ???"/>
+			<input id="pass" type="text" placeholder="pass = ???"/>
+			<button onclick="signUp()" > edit </button>
+     	</p>
+
+<script>
+	var myEmail =  myFunc({{var|tojson}})
+        	var id
+        	function myFunc(vars) {
+        	    console.log(vars);
+    			return vars
+				}
+function signUp(){
+			name=$("#name").val();
+			family=$("#family").val();
+			email=$("#email").val();
+			mobile=$("#mobile").val();
+			pass=$("#pass").val();
+			ajaxRequest = $.ajax({
+				  url: 'http://127.0.0.1:5000/edit',
+				  data: {"family":family,
+				  		"name":name,
+				  		"email":email,
+				  		"mobile":mobile,
+				  		"password":pass,
+				  		"femail":myEmail
+				},
+				  async: false
+
+					});
+			 ajaxRequest.done(function (data) {
+			 	console.log(data)
+			 })
+		}
+</script>
+</body>
+</html>

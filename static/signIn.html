@@ -1,10 +1,23 @@
 <html>
    <body>
+	<script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
+<script type="text/javascript"
+        src="https://static.neshan.org/api/web/v1/openlayers/v4.6.5.js?callback=initMyMap2"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
       <form action = "http://127.0.0.1:5000/sign-in" method = "post">
          <p>Enter Name:</p>
          <p>email : <input type = "text" name = "email" /></p>
          <p>password : <input type = "text" name = "pass" /></p>
          <p><input type = "submit" value = "submit" /></p>
       </form>
+
+      <form action = "http://127.0.0.1:5000/edit-profile" method = "post">
+         <p>edit profile:</p>
+         <p>email : <input type = "text" name = "email" /></p>
+         <p><input type = "submit" value = "submit" /></p>
+      </form>
+
+</script>
    </body>
 </html>
