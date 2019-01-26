@@ -180,14 +180,17 @@ def add_bill_item():
 @app.route('/see-medicine',methods=['get'])
 @cross_origin()
 def see_medicine():
-    json_s = json.dumps(Pharmacy.get_medicine())
-    return json_s
+    print(Pharmacy.get_medicine_filter(request.args.get('time')))
+
+    # json_s = json.dumps(Pharmacy.get_medicine())
+    return "done"
 
 @app.route('/see-medicine-filter',methods=['get'])
 @cross_origin()
 def see_medicine_filter():
-    json_s = json.dumps(Pharmacy.get_medicine_filter(request.args.get('time')))
-    return json_s
+    print(Pharmacy.get_medicine_filtee_filter(request.args.get('time')))
+    # json_s = json.dumps(Pharmacy.get_medicine_filter(request.args.get('time')))
+    return "done"
 
 @app.route('/add-appo',methods=['get'])
 @cross_origin()
